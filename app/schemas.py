@@ -2,10 +2,24 @@ from pydantic import BaseModel
 
 
 class User(BaseModel):
-    id: int
     email: str
 
 
+class UserCreate(User):
+    ...
+
+
+class UserUpdate(User):
+    email: str | None = None
+
+
 class Task(BaseModel):
-    id: int
     title: str
+
+
+class TaskCreate(BaseModel):
+    ...
+
+
+class TaskUpdate(BaseModel):
+    title: str | None = None

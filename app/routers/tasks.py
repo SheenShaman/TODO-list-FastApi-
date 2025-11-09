@@ -8,7 +8,7 @@ router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
 
 @router.post("/create", response_model=schemas.Task)
-async def create_task(task: schemas.Task, db: Session = Depends(get_db)):
+async def create_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
     new_task = models.Tasks(**task.model_dump())
     db.add(new_task)
     db.commit()
@@ -29,8 +29,8 @@ async def get_task_by_id(task_id: int, db: Session = Depends(get_db)):
     return task
 
 
-@router.post("/update_by_id/{task_id}", response_model=schemas.Task)
-async def update_task_by_id(task_id: int, updated_task: schemas.Task, db: Session = Depends(get_db)):
+@router.put("/update_by_id/{task_id}", response_model=schemas.Task)
+async def update_task_by_id(task_id: int, updated_task: schemas.TaskUpdate, db: Session = Depends(get_db)):
     task = db.query(models.Tasks).filter(models.Tasks.id == task_id).first()
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
@@ -43,7 +43,7 @@ async def update_task_by_id(task_id: int, updated_task: schemas.Task, db: Sessio
     return task
 
 
-@router.post("/delete_by_id/{task_id}")
+@router.delete("/delete_by_id/{task_id}", status_code=204)
 async def delete_task_by_id(task_id: int, db: Session = Depends(get_db)):
     task = db.query(models.Tasks).filter(models.Tasks.id == task_id).first()
     if not task:
@@ -51,4 +51,3 @@ async def delete_task_by_id(task_id: int, db: Session = Depends(get_db)):
 
     db.delete(task)
     db.commit()
-    return None

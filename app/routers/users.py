@@ -8,7 +8,7 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 
 @router.post("/create", response_model=schemas.User)
-async def create_user(user: schemas.User, db: Session = Depends(get_db)):
+async def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     new_user = models.Users(**user.model_dump())
     db.add(new_user)
     db.commit()
@@ -29,8 +29,8 @@ async def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
     return user
 
 
-@router.post("/update_by_id/{user_id}", response_model=schemas.User)
-async def update_user_by_id(user_id: int, updated_user: schemas.User, db: Session = Depends(get_db)):
+@router.put("/update_by_id/{user_id}", response_model=schemas.User)
+async def update_user_by_id(user_id: int, updated_user: schemas.UserUpdate, db: Session = Depends(get_db)):
     user = db.query(models.Users).filter(models.Users.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")

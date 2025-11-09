@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "fastapi_api_project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = ["sheen"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.0"
+uvicorn = "^0.30.0"
+sqlalchemy = "^2.0.0"
+pydantic = "^2.0.0"
+
+[tool.poetry.scripts]
+start = "uvicorn main:app --reload"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -17,9 +17,9 @@ class Task(BaseModel):
     title: str
 
 
-class TaskCreate(BaseModel):
+class TaskCreate(Task):
     ...
 
 
-class TaskUpdate(BaseModel):
+class TaskUpdate(Task):
     title: str | None = None

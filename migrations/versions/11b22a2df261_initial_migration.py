@@ -24,18 +24,18 @@ def upgrade() -> None:
                     sa.PrimaryKeyConstraint('id')
                     )
     op.create_index(op.f('ix_tasks_id'), 'tasks', ['id'], unique=False)
-    op.create_table('users',
+    op.create_table('routers',
                     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
                     sa.Column('email', sa.String(), nullable=False),
                     sa.PrimaryKeyConstraint('id'),
                     sa.UniqueConstraint('email')
                     )
-    op.create_index(op.f('ix_users_id'), 'users', ['id'], unique=False)
+    op.create_index(op.f('ix_users_id'), 'routers', ['id'], unique=False)
 
 
 def downgrade() -> None:
     """Downgrade schema."""
-    op.drop_index(op.f('ix_users_id'), table_name='users')
-    op.drop_table('users')
+    op.drop_index(op.f('ix_users_id'), table_name='routers')
+    op.drop_table('routers')
     op.drop_index(op.f('ix_tasks_id'), table_name='tasks')
     op.drop_table('tasks')

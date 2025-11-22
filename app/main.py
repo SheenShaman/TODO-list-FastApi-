@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 
 from app.database import engine, Base
-from app.routers import tasks, users
+from app.routers import users
+from app.routers import tasks
 
 app = FastAPI(title="FastAPI Project")
 
@@ -12,8 +13,8 @@ async def on_startup():
         await conn.run_sync(Base.metadata.create_all)
 
 
-app.include_router(tasks.router)
 app.include_router(users.router)
+app.include_router(tasks.router)
 
 
 @app.get("/health_check")

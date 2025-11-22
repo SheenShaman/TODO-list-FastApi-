@@ -14,3 +14,5 @@ uv.lock
 test.db
 poetry.lock
 .idea
+TODO.md
+alembic.ini

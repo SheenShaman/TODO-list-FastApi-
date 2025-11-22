@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+
 from app import schemas
 from app.repositories.tasks import TasksRepo
 
@@ -24,11 +25,15 @@ async def get_task_by_id(task_id: int) -> schemas.Task:
 
 
 @router.put("/update_by_id/{task_id}", response_model=schemas.Task)
-async def update_task_by_id(task_id: int, updated_task: schemas.TaskUpdate) -> schemas.Task:
+async def update_task_by_id(
+    task_id: int, updated_task: schemas.TaskUpdate
+) -> schemas.Task:
     task = await TasksRepo.get_one_by_id(id_=task_id)
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
-    return await TasksRepo.update_by_id(id_=task_id, **updated_task.model_dump(exclude_unset=True))
+    return await TasksRepo.update_by_id(
+        id_=task_id, **updated_task.model_dump(exclude_unset=True)
+    )
 
 
 @router.delete("/delete_by_id/{task_id}", status_code=204)

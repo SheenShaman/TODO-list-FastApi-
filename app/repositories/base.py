@@ -1,6 +1,6 @@
 from typing import TypeVar
 
-from sqlalchemy import select, update, delete
+from sqlalchemy import delete, select, update
 from sqlalchemy.orm import DeclarativeBase
 
 from app.database import get_session
@@ -38,9 +38,7 @@ class BaseRepo:
     async def update_by_id(cls, id_: int, **kwargs) -> T:
         async with get_session() as session:
             await session.execute(
-                update(cls.model)
-                .where(cls.model.id == id_)
-                .values(**kwargs)
+                update(cls.model).where(cls.model.id == id_).values(**kwargs)
             )
             await session.commit()
 
@@ -52,7 +50,5 @@ class BaseRepo:
     @classmethod
     async def delete_by_id(cls, id_: int) -> None:
         async with get_session() as session:
-            await session.execute(
-                delete(cls.model).where(cls.model.id == id_)
-            )
+            await session.execute(delete(cls.model).where(cls.model.id == id_))
             await session.commit()

@@ -22,3 +22,17 @@ start = "uvicorn app.main:app --reload"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.14.6,<0.15.0)"
+]
+
+
+[tool.ruff]
+line-length = 80
+exclude = ["venv", ".venv", "migrations", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["E", "F", "C", "B", "I"]
+ignore = ["E203"]

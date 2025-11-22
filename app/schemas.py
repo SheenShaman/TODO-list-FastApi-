@@ -5,8 +5,7 @@ class User(BaseModel):
     email: str
 
 
-class UserCreate(User):
-    ...
+class UserCreate(User): ...
 
 
 class UserUpdate(User):
@@ -17,8 +16,7 @@ class Task(BaseModel):
     title: str
 
 
-class TaskCreate(Task):
-    ...
+class TaskCreate(Task): ...
 
 
 class TaskUpdate(Task):

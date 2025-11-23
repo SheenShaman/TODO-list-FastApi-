@@ -7,6 +7,8 @@ class User(BaseModel):
 
 class UserCreate(User): ...
 
+class UserRegister(User):
+    password: str
 
 class UserUpdate(User):
     email: str | None = None

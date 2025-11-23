@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import create_async_engine
 
 from app.database import Base
 from app.config import settings
+from app.models import Users, Tasks
 
 config = context.config
 config.set_main_option(

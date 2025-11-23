@@ -1,25 +1,13 @@
-FastAPI
-MongoDB
-Kafka
-Kubernetes
-
-pydantinc v2
-alembic
-sqlalchemy
-async
-
-
-
 🧩 Tier 1: Async Foundations with FastAPI + SQLAlchemy + Pydantic
 Project: Async Task Manager API
 Goal: Learn async Python, FastAPI, and SQLAlchemy (with async engine) along with Pydantic for schema validation.
 
 Features:
-- CRUD for Users and Tasks.
-- Async endpoints using async def.
-- Pydantic models for request/response validation.
-- SQLAlchemy ORM models with PostgreSQL (async).
-- Alembic migrations for schema evolution.
+~~- CRUD for Users and Tasks.~~
+- ~~Async endpoints using async def.~~
+~~- Pydantic models for request/response validation.~~
+~~- SQLAlchemy ORM models with PostgreSQL (async).~~
+~~- Alembic migrations for schema evolution.~~
 
 Tech stack:
 FastAPI, Async SQLAlchemy, Alembic, Pydantic, PostgreSQL

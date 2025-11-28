@@ -1,26 +1,33 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends
 
 from app import schemas
+from app.dependencies import get_current_user
+from app.models import Users
 from app.repositories.tasks import TasksRepo
+from app.routers.exceptions import TasksNotFoundException
 
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
 
 @router.post("/create", response_model=schemas.Task)
-async def create_task(task: schemas.TaskCreate) -> schemas.Task:
-    return await TasksRepo.create(**task.model_dump(exclude_unset=True))
+async def create_task(
+    task: schemas.TaskCreate, user: Users = Depends(get_current_user)
+) -> schemas.Task:
+    return await TasksRepo.create(title=task.title, user_id=user.id)
 
 
 @router.get("/all", response_model=list[schemas.Task])
-async def get_tasks() -> list[schemas.Task]:
-    return await TasksRepo.get_all()
+async def get_tasks(
+    user: Users = Depends(get_current_user),
+) -> list[schemas.Task]:
+    return await TasksRepo.get_all_by_kwargs(user_id=user.id)
 
 
 @router.get("/get_one_by_id/{task_id}", response_model=schemas.Task)
 async def get_task_by_id(task_id: int) -> schemas.Task:
     task = await TasksRepo.get_one_by_id(id_=task_id)
     if not task:
-        raise HTTPException(status_code=404, detail="Task not found")
+        raise TasksNotFoundException
     return task
 
 
@@ -30,7 +37,7 @@ async def update_task_by_id(
 ) -> schemas.Task:
     task = await TasksRepo.get_one_by_id(id_=task_id)
     if not task:
-        raise HTTPException(status_code=404, detail="Task not found")
+        raise TasksNotFoundException
     return await TasksRepo.update_by_id(
         id_=task_id, **updated_task.model_dump(exclude_unset=True)
     )

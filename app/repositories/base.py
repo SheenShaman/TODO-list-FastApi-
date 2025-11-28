@@ -27,10 +27,26 @@ class BaseRepo:
             return result.scalars().all()
 
     @classmethod
+    async def get_all_by_kwargs(cls, **kwargs: dict) -> T | None:
+        async with get_session() as session:
+            result = await session.execute(
+                select(cls.model).filter_by(**kwargs)
+            )
+            return result.scalars().all()
+
+    @classmethod
     async def get_one_by_id(cls, id_: int) -> T | None:
         async with get_session() as session:
             result = await session.execute(
                 select(cls.model).where(cls.model.id == id_)
+            )
+            return result.scalar_one_or_none()
+
+    @classmethod
+    async def get_one_by_kwargs(cls, **kwargs: dict) -> T | None:
+        async with get_session() as session:
+            result = await session.execute(
+                select(cls.model).filter_by(**kwargs)
             )
             return result.scalar_one_or_none()
 

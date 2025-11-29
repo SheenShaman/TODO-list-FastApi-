@@ -1,15 +1,9 @@
 from datetime import datetime, timedelta
 
-from asyncpg.pgproto.pgproto import timedelta
-from dotenv import load_dotenv
 from jose import jwt
 from passlib.context import CryptContext
 
-from app.config import settings
-
-load_dotenv()
-
-from app import schemas
+from app import config, schemas
 from app.repositories.users import UsersRepo
 
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
@@ -26,11 +20,11 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 def create_access_token(data: dict) -> str:
     to_encode = data.copy()
     expire = datetime.utcnow() + timedelta(
-        minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
+        minutes=config.settings.ACCESS_TOKEN_EXPIRE_MINUTES
     )
     to_encode.update({"exp": expire})
     encode_jwt = jwt.encode(
-        to_encode, settings.JWT_ENCODE_KEY, settings.JWT_ALGORITHM
+        to_encode, config.settings.JWT_ENCODE_KEY, config.settings.JWT_ALGORITHM
     )
     return encode_jwt
 

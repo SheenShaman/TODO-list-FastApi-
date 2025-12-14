@@ -3,7 +3,9 @@ from datetime import datetime
 from fastapi import Depends, Request
 from jose import JWTError, jwt
 
-from app import config, constants, exceptions, schemas
+from app import schemas
+from app.utils import constants, exceptions
+from app.db.postgres import config
 from app.repositories.users import UsersRepo
 
 

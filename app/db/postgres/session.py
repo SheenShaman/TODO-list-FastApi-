@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import DeclarativeBase
 
-from app.config import settings
+from app.db.postgres.config import settings
 
 engine = create_async_engine(settings.database_url, echo=True)
 

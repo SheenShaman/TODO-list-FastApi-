@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Response
 from fastapi.params import Depends
 
-from app import auth, constants, dependencies, exceptions, schemas
+from app import auth, schemas
+from app.utils import constants, dependencies, exceptions
 from app.repositories.users import UsersRepo
 
 router = APIRouter(prefix="/users", tags=["Users"])

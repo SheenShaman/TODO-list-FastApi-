@@ -1,9 +1,10 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from app import constants, database
+from app.utils import constants
+from app.db.postgres.session import Base
 
 
-class Users(database.Base):
+class Users(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
@@ -12,7 +13,7 @@ class Users(database.Base):
     role = Column(String, nullable=False, server_default=constants.USER_ROLE)
 
 
-class Tasks(database.Base):
+class Tasks(Base):
     __tablename__ = "tasks"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)

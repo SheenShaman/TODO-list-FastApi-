@@ -5,9 +5,8 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from app.database import Base
-from app.config import settings
-from app.models import Users, Tasks
+from app.db.postgres.session import Base
+from app.db.postgres.config import settings
 
 config = context.config
 config.set_main_option(

@@ -3,7 +3,7 @@ from typing import TypeVar
 from sqlalchemy import delete, select, update
 from sqlalchemy.orm import DeclarativeBase
 
-from app.database import get_session
+from app.db.postgres.session import get_session
 
 T = TypeVar("T", bound=DeclarativeBase)
 

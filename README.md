@@ -19,7 +19,7 @@ Project: Notes & Analytics Service
 Goal: Learn how to use both relational and NoSQL data models.
 
 Features:
-- Store user data in PostgreSQL.
+- ~~Store user data in PostgreSQL.~~
 - Store user notes or logs in MongoDB (e.g., for flexible schema).
 - Expose endpoints that combine data from both databases.
 

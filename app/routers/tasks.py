@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends
 
-from app import dependencies, exceptions, models, schemas
+from app import schemas
+from app.utils import dependencies, exceptions
+from app.db.postgres import models
 from app.repositories.tasks import TasksRepo
 
 router = APIRouter(prefix="/tasks", tags=["Tasks"])

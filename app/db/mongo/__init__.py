@@ -1,0 +1,1 @@
+from app.db.mongo.client import mongo_db

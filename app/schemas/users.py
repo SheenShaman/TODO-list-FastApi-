@@ -14,15 +14,3 @@ class UserAuth(User):
 
 class UserUpdate(User):
     email: str | None = None
-
-
-class Task(BaseModel):
-    title: str
-    user_id: int
-
-
-class TaskCreate(Task): ...
-
-
-class TaskUpdate(Task):
-    title: str | None = None

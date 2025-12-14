@@ -3,7 +3,8 @@ from datetime import datetime, timedelta
 from jose import jwt
 from passlib.context import CryptContext
 
-from app import config, schemas
+from app import schemas
+from app.db.postgres import config
 from app.repositories.users import UsersRepo
 
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
